@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}
+Login
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+{% for message in get_flashed_messages() %}
+<div class="alert alert-danger">
+    <div class="flash">{{ message }}</div>
+</div>
+{% endfor %}
+<form method="post">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="username">Username</label>
+            <input name="username" type="text" class="form-control" id="username" placeholder="Username" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="password">Password</label>
+            <input name="password" type="password" class="form-control" id="password" placeholder="Password" required>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Login</button>
+  </form>
+
+    <div style="padding-top: 10px">
+        Don't have an account? <a href="{{ url_for('auth.register') }}" class="navbar-item"><u>Register Here</u></a>
+    </div>
+</div>
+{% endblock %}

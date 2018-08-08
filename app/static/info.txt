@@ -1,0 +1,10 @@
+Static files are of two types. First are those files like stylesheets
+ to which a page template can just refer to directly. 
+ Such files can live in any folder in the app, but are 
+ commonly placed within a static folder.
+
+The second type are those that you want to address in code, 
+such as when you want to implement an API endpoint that returns a 
+static file. For this purpose, the Flask object contains a built-in method, 
+send_static_file, which generates a response with a static file contained 
+within the app's static folder.

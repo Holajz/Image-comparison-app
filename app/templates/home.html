@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}
+Home
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-danger">
+        <div class="flash">{{ message }}</div>
+    </div>
+    {% endfor %}
+    <p>Home page for the Visual Studio Code Flask tutorial.</p>
+</div>
+{% endblock %}
