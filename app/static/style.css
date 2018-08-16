@@ -26,7 +26,7 @@ a[data-toggle="collapse"] {
     transform: translateY(-50%);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 950px) {
     #sidebar {
         margin-left: -250px;
     }
@@ -39,6 +39,7 @@ a[data-toggle="collapse"] {
 body {
     font-family: sans-serif;
     background: #fafafa;
+    min-width: 600px;
 }
 
 p {

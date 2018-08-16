@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}
+Sortable3
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Upload images</h1>
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-success">
+            <div class="flash">{{ message }}</div>
+        </div>
+    {% endfor %}  
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-row">
+                <div class="form-group col">
+                    <input type='file' name='file[]' multiple="" webkitdirectory directory mozdirectory required>
+                </div>
+        </div>
+        <div class="form-row">
+                <div class="form-group col">
+                    <label for="group">Group name</label>
+                    <input type="text" class="form-control" name="group" id="group" placeholder="Group name" required>
+                </div>
+        </div>
+        <button id="submit-button" class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

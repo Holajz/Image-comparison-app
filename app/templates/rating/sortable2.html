@@ -1,7 +1,303 @@
 {% extends "layout.html" %}
 {% block title %}
-Sortable2
+Sortable1
+{% endblock %}
+{% block head %}
+    {{ super() }}
+
+    <style>
+        /* First sortable */
+        #sortable {
+            width: auto;
+            list-style-type: none; 
+            margin: 0px; 
+            padding: 20px;
+        }
+        #sortable li {
+            margin: 0px 0px 0px 0; 
+            padding: 0px; 
+            float: left; 
+            width: 33%; 
+            background: white
+        }
+        /* img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .thumbnail {
+            position: relative;
+        }
+        .caption {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            width: 100%;
+        }
+        .h1 {
+            color: rgb(255, 255, 255);
+        } */
+
+
+        /* Second sortable */
+        #sortable2 {
+            width: auto;
+            list-style-type: none; 
+            margin: 0; 
+            padding: 20px;
+        }
+        #sortable2 button {
+            margin: 0px 0px 0px 0; 
+            padding: 0px;
+            float: left;
+            width: 50%; 
+            background: white;
+        }
+        #sortable2 button li {
+            margin: 0px 0px 0px 0; 
+            padding: 0px; 
+            float: left;
+            width: 100%; 
+            background: white
+        }
+        img {
+            max-width: 100%;
+            max-height: auto;
+            min-width: 100%;
+            min-height: auto;
+        }
+
+        /* Amount absolute value */
+
+        #amount {
+            width: auto;
+            list-style-type: none; 
+            float: left;
+            position: relative;
+            margin: 0; 
+            padding: 0;
+            min-width: 603px;
+        }
+        #amount li {
+            margin: 0px 0px 0px 0; 
+            padding: 0px; 
+            float: left;
+            position: relative; 
+            background: white
+        }
+        #slider {
+            width: 600px;
+            margin: 20px 0px 0px 0px;
+            clear: both;
+            float: left;
+        }
+        #submit-button {
+            display: block;
+            clear: both;
+            float: left;
+            margin: 20px 0px 20px 0px;
+        }
+        #submit-button3 {
+            display: block;
+            clear: both;
+            float: left;
+            margin: 20px 0px 20px 0px;
+        }
+        #slider .ui-slider-range { background: #5f8ae7; }
+        #slider .ui-slider-handle { border-color: #3264d1; }
+
+        .thumbnail {
+            position: relative;
+        }
+        .caption {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+        }
+        .h1 {
+            color: rgb(255, 255, 255);
+            text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000; 
+        }
+    </style>
+
+    <script>
+        $( function() {
+            $( "#sortable" ).sortable({
+                stop: function(event, ui) {
+                    var elements = document.querySelectorAll(".h1");
+                    
+                    index = 1;
+
+                    Array.from(elements).forEach(function(element){
+                        element.textContent = index;
+                        index += 1;
+                    });
+                },
+            });
+        } );
+    </script>
+
+    <script>
+        $( function() {
+          $( "#slider" ).slider({
+            range: "min",
+            value: 5,
+            min: 1,
+            max: 10,
+            step: 1,
+            stop: function( event, ui ) {
+              $( "#amount" ).val( ui.value );
+            }
+          });
+        //   $( "#amount" ).val( $( "#slider" ).slider( "value" ) );
+        } );
+    </script>
+
+    <script>
+        $(function() {
+            $( "#submit-button" ).click(function() {
+                var elements = document.querySelectorAll("#images");
+                var rating_input = document.getElementById("ratings");
+                var type_input = document.getElementById("type");
+
+                type_input.value = "sortable"
+                rating_input.value = ""
+                
+                Array.from(elements).forEach(function(element) {
+                    var rating = element.getAttribute("data-index");
+
+                    rating_input.value += " " + rating;
+
+                });
+                
+            });
+        });
+    </script>
+
+    <script>
+        $(function() {
+            $( "#submit-button2, #submit-button22" ).click(function() {
+                var elements = document.querySelectorAll("#images");
+                var rating_input = document.getElementById("ratings");
+                var type_input = document.getElementById("type");
+                var better_image = this;
+
+                type_input.value = "select";
+
+                image_id = better_image.children[0].getAttribute("data-index");
+
+                rating_input.value = "";
+
+                rating_input.value += image_id;
+
+                Array.from(elements).forEach(function(element) {
+                    var rating = element.getAttribute("data-index");
+
+                    if (rating != image_id) {
+                        rating_input.value += " " + rating;
+                    }
+
+                });  
+            });
+        });
+    </script>
+
+    <script>
+            $(function() {
+                $( "#submit-button3" ).click(function() {
+                    var elements = document.querySelectorAll("#images");
+                    var rating_input = document.getElementById("ratings");
+                    var type_input = document.getElementById("type");
+                    var amount_input = document.getElementById("amount");
+
+                    type_input.value = "amount";
+
+                    if (!amount_input.value) {
+                        amount_input.value = '5';
+                    }
+
+
+                    Array.from(elements).forEach(function(element) {
+                        var rating = element.getAttribute("data-index");
+
+                        rating_input.value += " " + rating;
+
+                    });
+                    
+                });
+            });
+        </script>
 {% endblock %}
 {% block content %}
-<p>Another version of sortable (clicking on the images shows first, second...)</p>
+
+<div class="container">
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-success">
+            <div class="flash">{{ message }}</div>
+        </div>
+    {% endfor %}  
+    <form method="POST">
+        {% set type = range(1,4) | random %}
+        <input type="hidden" id="type" name="type">
+        {% if type == 1 %}
+            <h1>Rate the cats</h1>
+            <input type="hidden" id="ratings" name="ratings">
+            <ul id="sortable">
+                    {% for image in images %}
+                        <li id="images" data-index="{{image['image_id']}}" class="ui-state-default">
+                            <div class="thumbnail">
+                                <img src="{{ url_for('static', filename=image['image_url'])}}" class="rounded mx-auto d-block">
+                                <div class="caption">
+                                    <p class="h1">{{loop.index}}</p>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+            </ul>
+            <button id="submit-button" class="btn btn-primary" type="submit">Submit</button>
+        {% elif type == 2 %}
+            <h1>Select the cuter cat</h1>
+            <input type="hidden" id="ratings" name="ratings">
+            <ul id="sortable2">
+                    {% for image in images %}
+                    {% if loop.index == 1 %}
+                    <button id="submit-button2" class="btn btn-default" type="submit">
+                    {% elif loop.index == 2  %}
+                    <button id="submit-button22" class="btn btn-default" type="submit">
+                    {% endif %}
+                    {% if loop.index == 1 or loop.index == 2 %}
+                        <li id="images" data-index="{{image['image_id']}}" class="ui-state-default">
+                            <div class="thumbnail">
+                                <img src="{{ url_for('static', filename=image['image_url'])}}" class="rounded mx-auto d-block">
+                            </div>
+                        </li>
+                    </button>
+                    {% endif %}
+                    {% endfor %}
+            </ul>
+        {% else %}
+            <h1>Rate the cat</h1>
+            <input type="hidden" id="ratings" name="ratings">
+            <input type="hidden" id="amount" name="amount">
+            <ul id="amount">
+                    {% for image in images %}
+                    {% if loop.index == 1 %}
+                        <li id="images" data-index="{{image['image_id']}}" class="ui-state-default">
+                            <div class="thumbnail">
+                                <img src="{{ url_for('static', filename=image['image_url'])}}" class="rounded mx-auto d-block" width="600px" height="600px">
+                            </div>
+                        </li>
+                        <div id="slider"></div> 
+
+                    {% endif %}
+                    {% endfor %}
+            </ul>
+            <button id="submit-button3" class="btn btn-primary" type="submit">Submit</button>
+        {% endif %}
+    </form>
+</div>
 {% endblock %}

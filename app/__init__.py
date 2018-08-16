@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, flash, request, redirect, url_for
 import os
     
 app = Flask(__name__, instance_relative_config=True)
@@ -28,3 +28,6 @@ app.register_blueprint(auth.bp)
 from . import rating
 app.register_blueprint(rating.bp)
 app.add_url_rule('/', endpoint='home')
+
+from . import upload
+app.register_blueprint(upload.bp)

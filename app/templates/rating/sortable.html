@@ -35,7 +35,19 @@ Sortable1
         }
         .h1 {
             color: rgb(255, 255, 255);
+            text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000; 
         }
+        #submit-button {
+            display: block;
+            clear: both;
+            float: left;
+            margin: 20px 0px 20px 0px;
+        }
+
     </style>
 
     <script>
@@ -77,6 +89,7 @@ Sortable1
 
 <div class="container">
     <h1>Rate the cats</h1>
+    <h6>(1 best)</h6>
     {% for message in get_flashed_messages() %}
         <div class="alert alert-success">
             <div class="flash">{{ message }}</div>
