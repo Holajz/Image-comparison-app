@@ -6,7 +6,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+    <style type="text/css">
+    @font-face {
+        font-family: "Vafle-Regular";
+        src: url("{{url_for('static', filename='fonts/Vafle VUT Regular.otf') }}") format("opentype");
+        }
+    </style>
     <!-- jQuery CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -26,9 +31,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='sourtable_style.css')}}">
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -53,17 +59,21 @@
                 <hr>
     
                 <ul class="list-unstyled components">
+
                     <li class="active">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Sortables</a>
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Annotation</a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
                             <li>
-                                <a href="{{ url_for('rating.sortable1') }}" class="navbar-item">Sortable</a>
+                                <a href="{{ url_for('rating.sortable1') }}" class="navbar-item">Between six</a>
                             </li>
                             <li>
-                                <a href="{{ url_for('rating.sortable2') }}" class="navbar-item">Sortable2</a>
+                                <a href="{{ url_for('rating.sortable2') }}" class="navbar-item">Between two</a>
                             </li>
                             <li>
-                                <a href="{{ url_for('rating.sortable3') }}" class="navbar-item">Sortable3</a>
+                                <a href="{{ url_for('rating.sortable4') }}" class="navbar-item">One</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('rating.sortable3') }}" class="navbar-item">All types</a>
                             </li>
                         </ul>
                     </li>
@@ -85,7 +95,7 @@
                         </ul>
                     </li> -->
                     <li>
-                        <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
+                        <a href="{{ url_for('home') }}" class="navbar-item">Home</a>
                     </li>
                     <li>
                         <a href="{{ url_for('information') }}" class="navbar-item">Information</a>
@@ -93,23 +103,25 @@
                     <li>
                         <a href="{{ url_for('contact') }}" class="navbar-item">Contact</a>
                     </li>
-                    {% if g.user['role'] == "admin" %}
-                    <li >
-                            <a href="{{ url_for('upload.upload') }}" class="navbar-item">Upload images</a>
-                    </li>
-                    {% endif %}
                     <hr>
+                    {% if not g.user %}
                     <li>
                         <a href="{{ url_for('auth.login') }}" class="navbar-item">Login</a>
                     </li>
                     <li>
                         <a href="{{ url_for('auth.register') }}" class="navbar-item">Register</a>
                     </li>
+                    {% endif %}
                     {% if g.user %}
                     <li >
                             <a href="{{ url_for('auth.logout') }}" class="navbar-item">Logout</a>
                     </li>
                     <hr>
+                    {% if g.user['role'] == "admin" %}
+                    <li >
+                            <a href="{{ url_for('upload.upload') }}" class="navbar-item">Upload images</a>
+                    </li>
+                    {% endif %}
                     {% endif %}
                     {% if g.user %}
                     <li >
@@ -124,26 +136,30 @@
             </nav>
     
             <!-- Page Content  -->
-            <div class="container-fluid">
-    
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                            <button type="button" id="sidebarCollapse" class="btn btn-primary" >
+            <div class="container">
+                
+                <div class="container" style="position:relative; height:1000px; width:100%;">
+                <nav class="navbar navbar-expand-lg">
+                            <button type="button" id="sidebarCollapse" class="btn btn-outline-dark" >
                                     <svg class="svg-inline--fa fa-align-left fa-w-14" aria-hidden="true" data-prefix="fas" data-icon="align-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M288 44v40c0 8.837-7.163 16-16 16H16c-8.837 0-16-7.163-16-16V44c0-8.837 7.163-16 16-16h256c8.837 0 16 7.163 16 16zM0 172v40c0 8.837 7.163 16 16 16h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16zm16 312h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm256-200H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16h256c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16z"></path></svg><!-- <i class="fas fa-align-left"></i> -->
                                     <span>Menu</span>
                             </button>
 
                 </nav>
-
-                <div class="line"></div>
                     {% block content %}
                     {% endblock %}
                 </div>
-
+                
+                <div class="container">
+                <footer class="footer" >
+                        <div class="container">
+                            <p>Copyright ©2018.</p>
+                        </div>
+                </footer>
+                </div>
             </div>
 
 
-        <footer>
-            <p>&copy; 2018</p>
-        </footer>
+        </div>
     </body>
 </html>

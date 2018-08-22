@@ -10,6 +10,9 @@ Login
 </div>
 {% endfor %}
 <form method="post">
+    {% autoescape false %}
+    <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
+    {% endautoescape %}
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="username">Username</label>
@@ -20,7 +23,7 @@ Login
             <input name="password" type="password" class="form-control" id="password" placeholder="Password" required>
         </div>
     </div>
-    <button class="btn btn-primary" type="submit">Login</button>
+    <button class="btn btn-outline-dark" type="submit">Login</button>
   </form>
 
     <div style="padding-top: 10px">

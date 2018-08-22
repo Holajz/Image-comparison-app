@@ -1,0 +1,4 @@
+FLASK_ENV=development
+FLASK_RUN_HOST=127.0.0.1
+FLASK_APP=app.webapp.py
+FLASK_RUN_PORT=2018

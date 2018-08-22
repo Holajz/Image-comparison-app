@@ -70,9 +70,21 @@ CREATE TABLE IF NOT EXISTS images (
   group_status TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS groups (
+  group_name TEXT PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS current_group (
+  current_group_name TEXT
+);
+
 DELETE FROM images;
+DELETE FROM groups;
+DELETE FROM current_group;
 delete from sqlite_sequence where name='images';
 VACUUM;
+
+INSERT INTO current_group VALUES ('default');
 
 INSERT INTO images (image_url, group_status) VALUES ("images/cat1.jpg", "default");
 INSERT INTO images (image_url, group_status) VALUES ("images/cat2.jpg", "default");

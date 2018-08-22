@@ -1,54 +1,9 @@
 {% extends "layout.html" %}
 {% block title %}
-Sortable1
+Rate six
 {% endblock %}
 {% block head %}
     {{ super() }}
-
-    <style>
-        #sortable {
-            width: auto;
-            list-style-type: none; 
-            margin: 0; 
-            padding: 0;
-        }
-        #sortable li {
-            margin: 3px 3px 3px 0; 
-            padding: 1px; 
-            float: left; 
-            width: auto; 
-            background: white
-        }
-        img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .thumbnail {
-            position: relative;
-        }
-        .caption {
-            position: absolute;
-            top: 5%;
-            left: 5%;
-            width: 100%;
-        }
-        .h1 {
-            color: rgb(255, 255, 255);
-            text-shadow:
-            -1px -1px 0 #000,
-            1px -1px 0 #000,
-            -1px 1px 0 #000,
-            1px 1px 0 #000; 
-        }
-        #submit-button {
-            display: block;
-            clear: both;
-            float: left;
-            margin: 20px 0px 20px 0px;
-        }
-
-    </style>
 
     <script>
         $( function() {
@@ -66,50 +21,59 @@ Sortable1
             });
         } );
     </script>
+
     <script>
-        $(function() {
-            $( "#submit-button" ).click(function() {
-                var elements = document.querySelectorAll("#images");
-                var rating_input = document.getElementById("ratings");
-
-                rating_input.value = ""
-                
-                Array.from(elements).forEach(function(element) {
-                    var rating = element.getAttribute("data-index");
-
-                    rating_input.value += " " + rating;
-
+            $(function() {
+                $( "#submit-button" ).click(function() {
+                    var elements = document.querySelectorAll("#images");
+                    var rating_input = document.getElementById("ratings");
+    
+                    rating_input.value = ""
+                    
+                    Array.from(elements).forEach(function(element) {
+                        var rating = element.getAttribute("data-index");
+    
+                        rating_input.value += " " + rating;
+    
+                    });
+                    
                 });
-                
             });
-        });
-    </script>
+        </script>
 {% endblock %}
 {% block content %}
 
-<div class="container">
-    <h1>Rate the cats</h1>
-    <h6>(1 best)</h6>
+<div id="heighterino">
     {% for message in get_flashed_messages() %}
-        <div class="alert alert-success">
+        <div class="alert alert-warning">
             <div class="flash">{{ message }}</div>
         </div>
     {% endfor %}  
     <form method="POST">
-        <input type="hidden" id="ratings" name="ratings">
-        <ul id="sortable">
-                {% for image in images %}
-                <li id="images" data-index="{{image['image_id']}}" class="ui-state-default">
-                    <div class="thumbnail">
-                        <img src="{{ url_for('static', filename=image['image_url'])}}" class="rounded mx-auto d-block" width="300" height="300">
-                        <div class="caption">
-                            <p class="h1">{{loop.index}}</p>
-                        </div>
-                    </div>
-                </li>
-                {% endfor %}
-        </ul>
-        <button id="submit-button" class="btn btn-primary" type="submit">Submit</button>
+        <input type="hidden" id="type" name="type">
+        {% autoescape false %}
+        <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
+        {% endautoescape %}
+                <h1 style="padding-left:20px;">Rate the cats</h1>
+                <input type="hidden" id="ratings" name="ratings">
+                <ul id="sortable">
+                        {% for image in images %}
+                            <li id="images" data-index="{{image['image_id']}}" class="ui-state-default">
+                                <div class="thumbnail">
+                                    <img src="{{ url_for('static', filename=image['image_url'])}}" class="mx-auto d-block">
+                                    <div class="caption">
+                                        <p class="h1">{{loop.index}}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                </ul>
+            <div>
+                <button id="submit-button" class="btn btn-outline-dark btn-lg" type="submit">Next</button>
+            </div>
+
+
     </form>
+                                    
 </div>
 {% endblock %}

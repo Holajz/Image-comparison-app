@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block title %}
+Rate one
+{% endblock %}
+{% block head %}
+    {{ super() }}
+
+    <script>
+            $( function() {
+              $( "#slider" ).slider({
+                range: "min",
+                value: 5,
+                min: 1,
+                max: 10,
+                step: 1,
+                stop: function( event, ui ) {
+                  $( "#amount" ).val( ui.value );
+                }
+              });
+            //   $( "#amount" ).val( $( "#slider" ).slider( "value" ) );
+            } );
+    </script>
+
+    <script>
+            $(function() {
+                $( "#submit-button3" ).click(function() {
+                    var elements = document.querySelectorAll("#images");
+                    var rating_input = document.getElementById("ratings");
+                    var amount_input = document.getElementById("amount");
+
+                    if (!amount_input.value) {
+                        amount_input.value = '5';
+                    }
+
+
+                    Array.from(elements).forEach(function(element) {
+                        var rating = element.getAttribute("data-index");
+
+                        rating_input.value += " " + rating;
+
+                    });
+                });
+            });
+    </script>
+
+{% endblock %}
+{% block content %}
+<div id="heighterino">
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <div class="flash">{{ message }}</div>
+        </div>
+    {% endfor %}  
+    <form method="POST">
+        <input type="hidden" id="ratings" name="ratings">
+        <input type="hidden" id="amount" name="amount">
+        {% autoescape false %}
+        <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
+        {% endautoescape %}
+        <ul id="amount">
+                {% for image in images %}
+                {% if loop.index == 1 %}
+                    <h1 id="amount-h1">Rate the cat</h1>
+                    <li id="images" data-index="{{image['image_id']}}" class="ui-state-default">
+                        <div class="thumbnail">
+                            <img src="{{ url_for('static', filename=image['image_url'])}}" class="mx-auto d-block" width="600px" height="600px">
+                        </div>
+                        
+                    </li>
+                    <div id="slider"></div> 
+
+                {% endif %}
+                {% endfor %}
+        </ul>
+        <div>
+            <button id="submit-button3" class="btn btn-outline-dark btn-lg" type="submit">Next</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -10,6 +10,9 @@ Register
     </div>
 {% endfor %}
 <form method="post">
+    {% autoescape false %}
+    <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
+    {% endautoescape %}
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="firstname">First name</label>
@@ -44,7 +47,7 @@ Register
         <input type="number" class="form-control" name="zip" id="zip" placeholder="Zip" min="1" max="99999" required>
       </div>
     </div>
-    <button class="btn btn-primary" type="submit">Register</button>
+    <button class="btn btn-outline-dark" type="submit">Register</button>
   </form>
   <div style="padding-top: 10px">
         Already have an account? <a href="{{ url_for('auth.login') }}" class="navbar-item"><u>Login Here</u></a>

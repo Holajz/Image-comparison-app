@@ -1,14 +1,15 @@
 import functools
+import os
 
-from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
-)
+from flask import Blueprint, Flask
+from flask import current_app as app
+from flask import (flash, g, redirect, render_template, request, session,
+                   url_for)
+from passlib.hash import sha256_crypt
+from werkzeug.exceptions import abort
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.db import get_db
-
-from passlib.hash import sha256_crypt
-
 
 # A Blueprint is a way to organize a group of related views 
 # and other code. Rather than registering views and other 
@@ -17,6 +18,16 @@ from passlib.hash import sha256_crypt
 # the application when it is available in the factory function.
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
+
+@bp.before_request
+def csrf_protect():
+    if request.method == "POST":
+        token = str(session.pop('_csrf_token', None))
+
+        form_token = request.form.get('_csrf_token')
+
+        if not token or token != form_token:
+            abort(404)
 
 # bp.before_app_request() registers a function that runs 
 # before the view function, no matter what URL is requested. 
@@ -132,9 +143,9 @@ def login():
             error = 'Incorrect username.'
         try:
             if not sha256_crypt.verify(password, user['password']):
-                error = 'Incorrect password3.'
+                error = 'Incorrect password.'
         except:
-            error = 'Incorrect password2.'
+            error = 'Incorrect password.'
         
 
         if error is None:

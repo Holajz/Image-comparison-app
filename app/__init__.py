@@ -1,9 +1,11 @@
-from flask import Flask, flash, request, redirect, url_for
+from flask import Flask, flash, request, g, redirect, url_for, session
 import os
-    
+group_for_annotation = "default"
+
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_mapping(
-    SECRET_KEY='dev',
+    ENV='development',
+    SECRET_KEY=os.urandom(16),
     DATABASE=os.path.join(app.instance_path, 'app.sqlite'),
 )
 
@@ -22,6 +24,12 @@ except OSError:
 from . import db
 db.init_app(app)
 
+from app.commands import push_images
+push_images.init_images(app)
+
+from app.commands import set_group
+set_group.set_group(app)
+
 from . import auth
 app.register_blueprint(auth.bp)
 
@@ -31,3 +39,12 @@ app.add_url_rule('/', endpoint='home')
 
 from . import upload
 app.register_blueprint(upload.bp)
+
+def generate_csrf_token():
+    if '_csrf_token' not in session:
+        session['_csrf_token'] = os.urandom(16)
+    return session['_csrf_token']
+
+app.jinja_env.globals['csrf_token'] = generate_csrf_token
+
+

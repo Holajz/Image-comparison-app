@@ -11,6 +11,9 @@ Sortable3
         </div>
     {% endfor %}  
     <form method="POST" enctype="multipart/form-data">
+        {% autoescape false %}
+        <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
+        {% endautoescape %}
         <div class="form-row">
                 <div class="form-group col">
                     <input type='file' name='file[]' multiple="" webkitdirectory directory mozdirectory required>
@@ -22,7 +25,7 @@ Sortable3
                     <input type="text" class="form-control" name="group" id="group" placeholder="Group name" required>
                 </div>
         </div>
-        <button id="submit-button" class="btn btn-primary" type="submit">Submit</button>
+        <button id="submit-button5" class="btn btn-outline-dark" type="submit">Submit</button>
     </form>
 </div>
 {% endblock %}

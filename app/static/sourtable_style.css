@@ -1,0 +1,126 @@
+/* First sortable */
+#sortable {
+    width: auto;
+    list-style-type: none; 
+    margin: 0px; 
+    padding-left: 20px;
+}
+#sortable li {
+    margin: 0px 0px 0px 0; 
+    padding: 0px; 
+    float: left; 
+    width: 33%;
+    border: none; 
+    background: white
+}
+
+.thumbnail {
+    position: relative;
+}
+
+
+/* Second sortable */
+#sortable2 {
+    width: auto;
+    list-style-type: none; 
+    margin: 0; 
+    border: none;
+    padding-left: 20px;
+}
+#sortable2 button {
+    margin: 0px 0px 0px 0px; 
+    padding: 0px;
+    float: left;
+    width: 50%; 
+    border: none;
+    background: white;
+}
+#sortable2 button li {
+    margin: 0px 0px 0px 0; 
+    padding: 0px; 
+    float: left;
+    width: 100%; 
+    border: none;
+    background: white
+}
+img {
+    max-width: 100%;
+    max-height: auto;
+    min-width: 100%;
+    min-height: auto;
+}
+
+/* Amount absolute value */
+
+#amount {
+    width: auto;
+    list-style-type: none; 
+    float: left;
+    position: relative;
+    text-align: left;
+    margin: 0; 
+    padding-left: 20px;
+    min-width: 603px;
+}
+#amount li {
+    margin: 0px 0px 0px 0; 
+    padding: 0px; 
+    position: relative; 
+    border: none;
+    background: white
+}
+#amount-h1 {
+    position: relative; 
+}
+#slider {
+    width: 600px;
+    margin: 20px 0px 0px 0px;
+    clear: both;
+    position: relative; 
+}
+#submit-button {
+    display: block;
+    clear: both;
+    float: left;
+    margin: 20px 0px 20px 20px;
+}
+#submit-button3 {
+    display: block;
+    clear: both;
+    float: left;
+    margin: 20px 0px 20px 20px;
+}
+#slider .ui-slider-range { background: #5f8ae7; }
+#slider .ui-slider-handle { border-color: #3264d1; }
+
+.thumbnail {
+    position: relative;
+}
+.caption {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+.h1 {
+    color: rgb(255, 255, 255);
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; 
+}
+
+
+#pagination1 {
+    clear: both; 
+    float: right;
+    position: relative;
+    left: -50%;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+#center-btn {
+    position: relative;
+    left: 50%;
+    margin: 0px; 
+}
