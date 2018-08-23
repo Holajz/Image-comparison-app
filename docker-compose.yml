@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  pero:
+    image: flask-sample-one
+    build: ./app
+    ports:
+      - 2018:2018

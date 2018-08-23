@@ -23,6 +23,17 @@ def set_group_command(group_name):
         ' FROM groups'
     )
 
+    images = db.execute(
+        'SELECT image_url'
+        ' FROM images'
+    )
+
+    images_in_db = []
+    for group in images:
+        images_in_db.append(group['image_url'])
+
+    print(images_in_db)
+
     groups_in_db = []
     for group in groups:
         groups_in_db.append(group['group_name'])

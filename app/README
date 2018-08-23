@@ -1,0 +1,36 @@
+dockerignore obsahuje slozku s images, je treba images pozdeji vlozit
+
+
+docker build -t <image_name>:latest .
+docker run -i -t --rm -p 2018:2018 <image_name>
+
+
+--rm - remove after
+-i - 
+-t - 
+-p - expose ports
+
+
+docker ps -a  
+show running containers
+
+
+docker images 
+show built images
+
+
+docker rmi $(docker images -f "dangling=true" -q)
+remove all untagged images
+
+
+docker rm $(docker ps -a -q)
+remove all killed containers
+
+docker kill $(docker ps -q)
+remove all unkilled containers
+
+
+docker exec <container_id> <shell command>
+
+
+docker cp <dir_path>. <container_id>:<dir_path>

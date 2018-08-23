@@ -1,3 +1,14 @@
+node_modules
+npm-debug.log
+Dockerfile*
+docker-compose*
+.dockerignore
+.git
+.gitignore
+README.md
+LICENSE
+.vscode
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -59,7 +70,7 @@ db.sqlite3
 # Flask stuff:
 instance/
 .webassets-cache
-app/static/images/*
+app/static/images/.
 
 # Scrapy stuff:
 .scrapy

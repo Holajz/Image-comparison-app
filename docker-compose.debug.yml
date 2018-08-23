@@ -1,0 +1,10 @@
+version: '2.1'
+
+services:
+  pero:
+    image: pero
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+        - 2018:2018

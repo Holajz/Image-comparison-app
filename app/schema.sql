@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS updates (
   new_pos INTEGER
 );
 
-DROP TABLE images;
+DROP TABLE IF EXISTS images;
 
 CREATE TABLE IF NOT EXISTS images (
   image_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -86,15 +86,15 @@ VACUUM;
 
 INSERT INTO current_group VALUES ('default');
 
-INSERT INTO images (image_url, group_status) VALUES ("images/cat1.jpg", "default");
-INSERT INTO images (image_url, group_status) VALUES ("images/cat2.jpg", "default");
-INSERT INTO images (image_url, group_status) VALUES ("images/cat3.jpg", "default");
-INSERT INTO images (image_url, group_status) VALUES ("images/cat4.jpg", "default");
-INSERT INTO images (image_url, group_status) VALUES ("images/cat5.jpg", "default");
-INSERT INTO images (image_url, group_status) VALUES ("images/cat6.jpg", "default");
-INSERT INTO images (image_url, group_status) VALUES ("images/cat7.jpg", "default");
-INSERT INTO images (image_url, group_status) VALUES ("images/cat8.jpg", "default");
-INSERT INTO images (image_url, group_status) VALUES ("images/cat9.jpg", "default");
-INSERT INTO images (image_url, group_status) VALUES ("images/cat10.jpg", "default");
-INSERT INTO images (image_url, group_status) VALUES ("images/cat11.jpg", "default");
-INSERT INTO images (image_url, group_status) VALUES ("images/cat12.jpg", "default");
+-- INSERT INTO images (image_url, group_status) VALUES ("images/cat1.jpg", "default");
+-- INSERT INTO images (image_url, group_status) VALUES ("images/cat2.jpg", "default");
+-- INSERT INTO images (image_url, group_status) VALUES ("images/cat3.jpg", "default");
+-- INSERT INTO images (image_url, group_status) VALUES ("images/cat4.jpg", "default");
+-- INSERT INTO images (image_url, group_status) VALUES ("images/cat5.jpg", "default");
+-- INSERT INTO images (image_url, group_status) VALUES ("images/cat6.jpg", "default");
+-- INSERT INTO images (image_url, group_status) VALUES ("images/cat7.jpg", "default");
+-- INSERT INTO images (image_url, group_status) VALUES ("images/cat8.jpg", "default");
+-- INSERT INTO images (image_url, group_status) VALUES ("images/cat9.jpg", "default");
+-- INSERT INTO images (image_url, group_status) VALUES ("images/cat10.jpg", "default");
+-- INSERT INTO images (image_url, group_status) VALUES ("images/cat11.jpg", "default");
+-- INSERT INTO images (image_url, group_status) VALUES ("images/cat12.jpg", "default");
